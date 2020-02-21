@@ -99,7 +99,7 @@ The paper is organized as follows. In the results section, we concisely explain 
 
 \section{Results}
 
-\subsection*{Data input}
+\subsection*{Data collection}
 The microfluidics sequence images are procured from \cite{ref13} recent experimental work. The HAYY device is a composed Polydimethylsiloxane (PDMS) model that contains 16 individual channels combined into four modules as shown in Fig.\ref{fig:micro}.
 
 \begin{figure*}
@@ -109,20 +109,16 @@ The microfluidics sequence images are procured from \cite{ref13} recent experime
 \label{fig:micro}
 \end{figure*}
 
-All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside microfluidics chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing alignment. The order of rows could be different depending on capturing adjustment. For instant, if the camera set on guideline 10 and 20, the first row of captured image starts with 7 traps and so on.
-The experimental ended with capturing 391 images with 10 minutes interval in between images. 
+All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside microfluidics chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing guideline. The order of rows could be different depending on capturing adjustment. For instant, if the camera positioned on guideline 10 and 20, the first row of captured image starts with 7 traps and so on. The experimental ended with capturing 391 images with 10 minutes interval between images. 
 
 \subsection{Data Pre-processing}
-Since microfluidics images have relatively low resolution and are considered as challenging task for visualization, we decided to partition every single image to sub-image based on individual trap. Traps are labeled from time-point 1 to time-point 391 as illustrated in Fig.\ref{fig:micro}. All sub-images positioned with respect to local traps at 60x60 resolution. Images are captured at four locations of the microfluidics device. 1st position: camera covered guideline 10-20. 2nd position: camera covered guideline 30-40. 3rd position: camera covered guideline 50-60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position as shown in Fig.\ref{fig:micro}. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image features extraction. We tested 391 sequence sub-images for each trap, extract and label them as following: trap number (trap\_num),time number (time\_num), total number of cell (total\_objs), cell x coordinate (obj\_X), cell y coordinate(obj\_Y) and cell area (obj\_area) as shown in Fig.\ref{fig:table}. The features of each image are collected orderly by row and increases by number of available objects in the image. For instance, the features of first image input with four cells are collected by indicating four rows for each cell features and assigning time number (time\_num) one for all of them. This labeling method continuously followed for the rest of images.
+Since microfluidics images have relatively low resolution and are considered as challenging task for visualization, we partitioned every single image to sub-image based on individual trap. Traps are labeled from time-point 1 to time-point 391 as illustrated in Fig.\ref{fig:micro}. All sub-images partitioned with respect to local traps at 60x60 resolution. Images are captured at four locations of the microfluidics device. 1st position: camera covered guideline 10-20. 2nd position: camera covered guideline 30-40. 3rd position: camera covered guideline 50-60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position as shown in Fig.\ref{fig:micro}. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image features extraction. We collected 391 sequence sub-images for each trap, extract and label them as following: trap number (trap\_num),time number (time\_num), total number of cell (total\_objs), cell x coordinate (obj\_X), cell y coordinate(obj\_Y) and cell area (obj\_area) as shown in Fig.\ref{fig:table}. The features of each image are collected orderly by row and increases by number of available objects in the image. For instance, the features of first image input with four cells are collected by indicating four rows for each cell and assigning time number (time\_num) one for all of them. This labeling method continuously followed for the rest of images.
 
 
 
-% 100  randomly selected sub-images are used for training dataset. Since the number of cells on each image could have variety number of cells, We choose images with any number of cells inside trap and images with blank trap (no cells). We then train a model for two classes; any image with cell labeled as cell class and any image without cell labeled as trap class. For feature extraction, We considered some models such as Single Short Detector (SSD), Faster R-CNN and and You Only Look Once(YOLOv3) \cite{ref19, ref20}. The indication of the comparison shows that YOLO has more efficient actuary. 
-
- 
 \subsection{Distance calculation and time-points conversion}
 
-We did feature extraction for 104 available traps as illustrated in Fig.\ref{fig:micro}. In addition, we calculated cell distance using euclidean equation:
+The process of feature extraction carried on for 104 available traps as illustrated in Fig.\ref{fig:micro}. We then surcharged individual cell distance feature to the existing dataset by using euclidean equation:
 
 \begin{equation}
 \begin{split}
@@ -133,7 +129,7 @@ i =  [1,2,3,4,..., m ] \\
 \end{split}
 \end{equation}
 
-where $ d_i $ is distance between centroid point of cell and reference point $ (cell-ref) $ and $ x_i $ and $ y_i $ are cells coordinate in each image. $ x_r $ and $ y_r $ are trap reference point. Generally, these points could be chosen at any point of image. We decided to choose the reference point based on cell flow direction and potential cell division point. Also,$ i $ is number of images corresponding to time-points and $ m $ is the maximum time-point equivalents to total number images. Here, $ x_r $ and  $ y_r $ are 30 and 34 respectively at trap outlet as shown in $\nameref{S1_Fig}$ . In further step, we converted time to degree by using: 
+where $ d_i $ is distance between centroid point of cell and reference point and $ x_i $ and $ y_i $ are cells coordinate of each image. $ x_r $ and $ y_r $ are trap reference point. Generally, these points could be chosen at any point of image. We decided to choose the reference point based on cell flow direction and potential cell division point. Also,$ i $ is number of images corresponding to time-points and $ m $ is the maximum time-point equivalents to total number images. Here, $ x_r $ and  $ y_r $ are 30 and 34 respectively at trap outlet as shown in $\nameref{S1_Fig}$ . In further step, we converted time to degree by using: 
  
 \begin{equation}
 \begin{split}
