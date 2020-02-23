@@ -48,7 +48,7 @@
 \maketitle
 
 \begin{abstract}
-Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Plot, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. This software is implemented in an R package $\mu$Polar \ available through GitHub. 
+Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Plot, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. 
 \end{abstract}
 
 
@@ -70,7 +70,6 @@ Cell division enumeration is a budding yeast process that is one of the essentia
 
 To this end, we developed a circular plotting method, $\mu$Plot, to interpret cell movements and cellular division events at different time points from microfluidics images. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices.
 
-
 The paper is organized as follows. In the results section, we concisely explain the data collection, feature extraction, and $\mu$Polar visualization analysis. In the discussion section, we focus on $\mu$Polar R package and $\mu$Polar functions. This section additionally covers some of $\mu$Polar plot examples including RLS. Finally, the conclusion section renders a summary of the proposed visualization method for microfluidics images and future work.
 
  
@@ -81,24 +80,25 @@ The paper is organized as follows. In the results section, we concisely explain 
 \section{Results}
 
 \subsection*{Data collection}
-The microfluidics sequence images are procured from \cite{ref13} recent experimental work. The HAYY device is a composed Polydimethylsiloxane (PDMS) model that contains 16 individual channels combined into four modules as shown in Fig.\ref{fig:micro}.
+The microfluidics sequence images are procured from \cite{ref13} recent experimental work. The high-throughput yeast aging analysis (HYAA) chips device is a composed Polydimethylsiloxane (PDMS) model that contains 16 individual channels combined into four modules as shown in Fig.\ref{fig:micro}(a).
 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/fluidics.pdf}
-\caption{ HYAA microfluidics device. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
+\caption{ HYAA microfluidics chips. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
 \label{fig:micro}
 \end{figure*}
 
-All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at a temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside the microfluidic chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing guidelines. The order of rows could be different depending on capturing adjustment. For instant, if the camera positioned on guidelines 10 and 20, the first row of the captured image starts with 7 traps and so on. The experiment ended with capturing 391 images with 10 minutes interval between images. 
+All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at a temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside the microfluidic chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing guidelines. The order of rows could be different depending on capturing adjustment. For instant, if the camera positioned on guidelines 10 and 20, the first row of the captured image starts with 7 traps and so on. The experiment ended with capturing 391 images with 10 minutes interval. Images are captured at four locations of the microfluidics device ( Fig.\ref{fig:micro}(b)). 1st position: camera covered guidelines 10 - 20. 2nd position: camera covered guidelines 30 - 40. 3rd position: camera covered guideline 50 - 60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position (10 - 20) as shown in Fig.\ref{fig:micro}(c).
 
 \subsection{Data Pre-processing}
-Since microfluidics images have relatively low resolution and are considered a challenging task for visualization, we partitioned every single image to sub-image based on the individual trap. Traps are labeled from time-point 1 to time-point 391 as illustrated in Fig.\ref{fig:micro}. All sub-images partitioned concerning local traps at 60x60 resolution. Images are captured at four locations of the microfluidics device. 1st position: camera covered guidelines 10-20. 2nd position: camera covered guidelines 30-40. 3rd position: camera covered guideline 50-60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position as shown in Fig.\ref{fig:micro}. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image feature extraction. We collected 391 sequence sub-images for each trap, extract and label them as following: trap number (trap\_num),time number (time\_num), total number of cell (total\_objs), cell x coordinate (obj\_X), cell y coordinate(obj\_Y) and cell area (obj\_area) as shown in Fig.\ref{fig:table}. The features of each image are collected orderly by row and increases by the number of available objects in the image. For instance, the features of the first image input with four cells are collected by indicating four rows for each cell and assigning time number (time\_num) one for all of them. This labeling method continuously followed for the rest of the images.
+
+Since microfluidics images have relatively low resolution and are considered a challenging task for visualization, we partitioned every single image to sub-images based on the individual trap. Traps are labeled from time-point 1 to time-point 391 as illustrated in Fig.\ref{fig:micro}. All sub-images partitioned with respect to local traps at 60x60 dimension. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image feature extraction. We collected 391 sequence sub-images for each trap, extract and label them as following: trap number (trap\_num),time number (time\_num), total number of cell (total\_objs), cell x coordinate (obj\_X), cell y coordinate(obj\_Y) and cell area (obj\_area) as shown in Fig.\ref{fig:table}. The features of each image are collected orderly by row and increases by the number of available cells in the image. For instance, the features of the first image input with four cells are collected by indicating four rows for each cell and assigning time number (time\_num) one for all of them. This labeling method continuously followed for the rest of the images.
 
 
 \subsection{Distance calculation and time-points conversion}
 
-The process of feature extraction carried on for 104 available traps as illustrated in Fig.\ref{fig:micro}. We then surcharged individual cell distance feature to the existing dataset by using the euclidean equation:
+The process of feature extraction carried on for 104 available traps as illustrated in Fig.\ref{fig:micro}(c). We then surcharged individual cell distance feature from the existing dataset by using the euclidean equation:
 
 \begin{equation}
 \begin{split}
@@ -120,22 +120,22 @@ where $ d_i $ is distance between centroid point of cell and reference point. $ 
 
 here, $theta $ = \text{maximum degree}$/$\text{maximum time} and $ degree $ is accumulative degree of each radius and $ n $ is equal to maximum degree(e.g, 360). All distance values are considered as radius for cell movement interpretation.     
 
-\subsection{$\mu$Polar input}
-Fig.\ref{fig:table} illustrates an example of traps at time-points 1 and 2. Time-point 1 shows distance between and area of each cell. dL1, dl2, dL3 and dL4 are distance from reference point. a1, a2, a3 and a4 are area of each cell. The table in Fig.\ref{fig:table} represents an example of the $\mu$Polar dataset format at two time-points. The dataset feature are labeled as following; trap\_num (trap number),  time\_num (image time number), total\_objs (total available cells inside image), obj\_X and obj\_Y are cell coordinate, area (cell area), dist (cell distance to reference point). Image at time-pint 1 belongs to rows 1 - 4 of table dedicating image with four cells and image at time-point 2 belongs to row 5 - 7 dedicating image with three cells. 
 
+\subsection{$\mu$Polar input}
+
+Fig.\ref{fig:table} illustrates an example of traps at time-points 1 and 2. Time-point 1 shows label for distance and area of each cell. dL1, dl2, dL3 and dL4 are distance from reference point. a1, a2, a3 and a4 are area of each cell. The table in Fig.\ref{fig:table} represents an example of the $\mu$Polar dataset format at two time-points. The dataset feature are labeled as following; trap\_num (trap number), time\_num (image time number), total\_objs (total available cells inside image), obj\_X and obj\_Y are cell coordinate, area (cell area), dist (cell distance to reference point). Image at time-pint 1 belongs to rows 1 - 4 of table dedicating image with four cells and image at time-point 2 belongs to row 5 - 7 dedicating image with three cells. 
 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/table.pdf}
-\caption{ A schematic and plot examples of $\mu$Polar.}
+\caption{ A sub-image with label for distance and area at time-point 1. A example of $\mu$Polar input data format at two time-points.}
 \label{fig:table}
 \end{figure*}
 
 
-
 \subsection{$\mu$Polar visualization paradigm}
 
-Fig.\ref{fig:polar} shows a schematic of $\mu$Polar with some sample time-points for different trap. Images at time-points 1 - 5 are represented in $\mu$polar plot. The theta for time-points 1 - 5 are 0.92, 1.84, 2.76, 3.68, 4.6 respectively. The plot has two regions separated with red circle, denote as $ A $ region (above reference line) and $ B $ region ( below reference). In this example, cells in " orange " color are in $ A $  region and cells in "green" color are in $ B $ region. The cell size variation is based on cell area. The number of cell(s) on each time-point radius indicate the number cell (s) on the each image. For instance, there are two cells at time-point 1, three cells at time-point 2, three cells at time-point 3, two cells at time-point 4 and one cell at time-point 5 respectively. 
+Fig.\ref{fig:polar} (b) shows a schematic of $\mu$Polar with some sample time-points from a trap. Images at time-points 1 - 6 are represented in $\mu$polar plot. The theta for time-points 1 - 6 are 0 ,0.92, 1.84, 2.76, 3.68, 4.6 respectively. The plot has two regions separated with red circle, denoted as $ A $ region (above reference line) and $ B $ region (below reference). In this example, "White" color represents traps without cell located on reference line based on image theta, "black" color represents traps with single cell located on radius line based on cell distance and image theta, "green" color represents traps with two cells located on radius line based on cell distance and image theta and "orange" color represents traps with three cells located on radius line based on cell distance and image theta. The cell size variation is based on cell area. The number of cell(s) on each time-point radius indicate the number cell (s) on the each image. For instance, there is no cell at time-point 1, there are two cells at time-point 2, three cells at time-point 3, three cells at time-point 4, two cells at time-point 5 and one cell at time-point 6 respectively. 
 
  
 \begin{figure*}
@@ -146,9 +146,8 @@ Fig.\ref{fig:polar} shows a schematic of $\mu$Polar with some sample time-points
 \end{figure*}
 
 \section{Discussion}
-We developed an R package called "$\mu$Polar" for microfluidicss image visualization where any individual trap could be visualized based on number of cell and area. The package is using three libraries including "dplyr", "plyr" and "plotly". As shown in Fig.\ref{fig:table} the "$\mu$Polar" package requires image time number, total number of available cells in image and cell distance. The "$\mu$Polar" function takes dataset, time number, cell number, cell area, cell distance, offset value and total number of time. 
 
-Fig.\ref{fig:polar} is an interpretation of a trap sequence images from time-point 1 to time-point 391. The color representation are based on number of available cell(s) in an image. Here, we used default setting where white color represents trap without cell, black color represents trap with one cell, green color represents trap with two cells, light-brown represents trap with 3 cells, blue color represents trap with 4 cells, orange color represents trap with 5 cells and sky-blue color represents trap with more than 5 cells. Furthermore, red circle color represents trap reference line. For instance , time-point 275 to  time-point 313 and time-point353 to time-point 360 are represented in white color and  laid on reference line (red). $ Tm  $ and  $ Ce $  are image time-point number and number of available cell(s) respectively. An An example of $\mu$Polar plot given at time-point 21 where cell color shown in black since there only single cell available.  
+Fig.\ref{fig:polar}(a) is an interpretation of a trap sequence images from time-point 1 to time-point 391. The color representation are based on number of available cell(s) in an image. Here, we used default setting where white color represents trap without cell, black color represents trap with one cell, green color represents trap with two cells, light-brown represents trap with 3 cells, blue color represents trap with 4 cells, orange color represents trap with 5 cells and sky-blue color represents trap with more than 5 cells. Furthermore, red circle color represents trap reference line. For instance , time-point 275 to  time-point 313 and time-point353 to time-point 360 are represented in white color and  laid on reference line (red). $ Tm  $ and  $ Ce $  are image time-point number and number of available cell(s) respectively. An An example of $\mu$Polar plot given at time-point 21 where cell color shown in black since there only single cell available.  
 
 \subsection{$\mu$Polar cell area and offset}
 
@@ -164,23 +163,14 @@ Cell area and offset features could be used for better plot analysis. The cell a
 
 \subsection{$\mu$Polar with RLS}
 
-$\mu$Polar has addition option for replicative lifespan (RLS) visualization. This feature could be added to the plot if RLS dataset is available from dataset. The RLS division points appear inside plot out layer with "star" sign. we previously collected RLS data for there trap and applied these information for some $\mu$polar plot examples. Fig.\ref{fig:areaoff}(c1) shows $\mu$polar plot with countable red color "stat" representing  trap RLS. In this particular example, there are 22 red "stars" corresponding to the trap RLS. Fig.\ref{fig:areaoff}(c1) shows another  example of $\mu$polar plot with better cell division process. In this example, there are 13 red " stars" corresponding  to trap RLS.  
-In order to have better visualization and avoid over lapping, it is advisable to chose offset value properly. Fig.\ref{fig:areaoff} shows an example of $\mu$Polar with RLS. The cell area and offset value set to zero and 10 respectively.        
+$\mu$Polar has addition option for replicative lifespan (RLS) visualization. This feature could be added to the plot if RLS dataset is available from dataset. The RLS division points appear inside plot out layer with "star" sign. we previously collected RLS data for there trap and applied these information for some $\mu$polar plot examples. Fig.\ref{fig:areaoff}(c1) shows $\mu$polar plot with countable red color "stat" representing  trap RLS. In this particular example, there are 22 red "stars" corresponding to the trap RLS. Fig.\ref{fig:areaoff}(c1) shows another  example of $\mu$polar plot with better cell division process. In this example, there are 13 red " stars" corresponding  to trap RLS. In order to have better visualization and avoid over lapping, it is advisable to chose offset value properly. Fig.\ref{fig:areaoff} shows an example of $\mu$Polar with RLS. The cell area and offset value set to zero and 10 respectively.        
 
 
+\section{Star * Method}
 
-\section{Stat * Method}
-
-%example
-% Mass cytometry experiments
-% Mass cytometry data used in this manuscript, together with the information regarding cell preparation, data acquisition, and processing was obtained from the original publications (31-33). Through the rest of the manuscript, we will call these respective datasets by their main contributing authors: Bodenmiller/Zunder/Finck, Bendall/Davis/Amir, and Fragiadakis.
-
-
-
-
+We developed an R package called "$\mu$Polar" for microfluidicss image visualization where any individual trap could be visualized based on number of cell and area. The package is using three libraries including "dplyr", "plyr" and "plotly". As shown in Fig.\ref{fig:table} the "$\mu$Polar" package requires image time number, total number of available cells in image and cell distance. The "$\mu$Polar" function takes dataset, time number, cell number, cell area, cell distance, offset value and total number of time. This software is implemented in an R package $\mu$Polar \ available through GitHub.
 
 \section{Conclusion}
-
 
 % \begin{figure*}
 % \centering
@@ -189,8 +179,6 @@ In order to have better visualization and avoid over lapping, it is advisable to
 % \label{fig:imageData}
 % \end{figure*}
 
-\subsection{microfluidicss Device}
-In the following, we summarize ... 
  
 % \begin{figure*}
 % \centering
