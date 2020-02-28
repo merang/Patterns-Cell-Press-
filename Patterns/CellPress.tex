@@ -85,7 +85,7 @@ The paper is organized as follows. In the results section, we concisely explain 
 
 \section{Results}
 
-We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images visualization where any individual image could be visualized based on the number of cells and areas (optional). The package is using three libraries including "dplyr", "plyr" and "plotly". As shown in Fig.\ref{fig:table}, the "$\mu$Polar" package requires image time number, cell distance with adding area option. The "$\mu$Polar" function takes time-lapse dataset, time (image time number), distance (reference-cell distance), area (cell area), offset (adjustment value for gap between cells and plot out layer and c.Adjust (adjustment of cell size for available cell area). The package is setup for up to 15 color codes categorizing number of cell and any number above that would be a random color. The color codes are adjustable and could be vary for different image types. 
+We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images visualization where any individual image could be visualized based on the number of cells and areas (optional). The package is using three libraries including "dplyr", "plyr" and "plotly". As shown in Fig.\ref{fig:table}, the "$\mu$Polar" package requires image time number, cell distance. The cells areas could be included optionally. The "$\mu$Polar" function takes time-lapse dataset, time (image time number), distance (reference-cell distance), area (cell area), offset (adjustment value for gap between cells and plot out layer and c.Adjust (adjustment of cell size for available cell area). The package is setup for up to 15 color codes categorizing number of cell and any number above that would be a random color. The color codes are adjustable and could be vary for different image types. 
 
 \begin{figure*}
 \centering
@@ -98,7 +98,24 @@ We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based
 \subsection{$\mu$Polar for microfluidics images}
 
 
-% Add more details  ................................................
+We have applied $\mu$Polar package to our available traps dataset. Fig.\ref{fig:compare} shows the results for trap 1, trap 12, trap 22, trap 41, trap 50, trap 59, trap 73, trap 82, trap 90, trap 92. We chose these traps based on investigation of cell development at early ,middle and late levels. In these images , each color  represents a number of cells, The white, black, light blue, pink, green, purple, orange colors are representing 0 cell (blank trap),1 cell, 2 cells, 3 cells, 4 cells , 5 cells and 6 cells respectively. 
+The Fig.\ref{fig:compare} illustrates that a trap with two cell is most dominating occurrence event for most of traps. following by pink color. In addition, overcrowded events occurred for most of traps at different time-points regardless of trap location.   
+
+
+TP1 represents the time-lapse visualization of trap 1 where cell division occurred normally at bi beginning  between cells inside trap and at the trap outlet. Gradually, the development process shifts where there a cell inside trap and growing number of cells above that and become overcrowded later on based on color representation for each number of cells.   
+
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/compare.pdf}
+\caption{  $\mu$Polar visualization for several traps from microfluidics images.}
+\label{fig:compare}
+\end{figure*}
+
+
+
+
 
 Cell area and offset features could be used for better plot analysis. The cell area could be set to "NA" if the cell area information is not available. Furthermore, the offset value is to adjust the gap between the maximum radius of the dataset and plot out layer. This option could initially set to "NA" and change later on to improve visualization. Fig.\ref{fig:areaoff}(a1) shows a $\mu$polar plot with cell area and offset are equaled to "NA". Fig.\ref{fig:areaoff}(a2) shows $\mu$polar plot with offset value set to 8 where the gap between the maximum radius and plot out layer increase by 8 units. Fig.\ref{fig:areaoff}(b1, b2) show $\mu$polar plot with cell area size decreased and increased by 2 and 8 units respectively. These options are useful for controlling over-size cells and monitoring cell dynamic shape, in particular, if there is no division and cell reached its senescent or over-crowded cells stage.    
 
@@ -202,7 +219,7 @@ where $ d_i $ is the distance between the centroid point of cell and reference p
 \end{split}
 \end{equation}
 
-here, $theta $ = \text{maximum degree}$/$\text{maximum time} and $ degree $ is accumulative degree of each radius and $ n $ is equal to maximum degree (e.g, 360). All distance values are considered as radius for cell movement interpretation.     
+here, $theta $ = \text{maximum degree}$/$\text{maximum time} and $ degree $ is accumulative degree of each radius and $ n $ is equal to maximum degree (e.g. 360). All distance values are considered as radius for cell movement interpretation.     
 
 
 \subsection{$\mu$Polar input}
@@ -278,13 +295,6 @@ This software is implemented in an R package $\mu$Po available through GitHub fr
 {\bf  Cell distance calculation method.} (a) trap reference point. (b) an example of cell distance from reference point. (c) Sample of some images with labeled cells. 
 
 
-
-\begin{figure*}
-\centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/compare.pdf}
-\caption{  $\mu$Polar visualization for several traps from microfluidics images.}
-\label{fig:compare}
-\end{figure*}
 
 
 
