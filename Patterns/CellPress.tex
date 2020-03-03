@@ -50,7 +50,7 @@
 
 \begin{Summary}
 
-Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of cells division. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize the cell movements and cellular division events at different time-points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices including microscopic images. This software is implemented in an R package $\mu$Polar\ available through GitHub.
+Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of cells division. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize the trends and patterns of the cell movements and cellular division events at different time-points. Our method is interactive and easy to use. We demonstrated the utility of our method by visulazing the  events of dividing yeast cells and migrating mouse fibroblasts. Our method could be potentially applied to other types of microfluidic devices including microscopic images. This software is implemented in an R package $\mu$Polar\ available through GitHub.
 
 
 \end{Summary}
@@ -85,68 +85,79 @@ The paper is organized as follows. In the results section, we concisely explain 
 
 \section{Results}
 
-We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images visualization where any individual image could be visualized based on the number of cells and areas (optional). The package is using three libraries including "dplyr", "plyr" and "plotly". As shown in Fig.\ref{fig:table}, the "$\mu$Polar" package requires image time number, cell distance. The cells areas could be included optionally. The "$\mu$Polar" function takes time-lapse dataset, time (image time number), distance (reference-cell distance), area (cell area), offset (adjustment value for gap between cells and plot out layer and c.Adjust (adjustment of cell size for available cell area). The package is setup for up to 15 color codes categorizing number of cell and any number above that would be a random color. The color codes are adjustable and could be vary for different image types. 
+We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images. The sequence images could be visualized based on time, distance, cell area (optional), color-based cell tracking and given RLS dataset( optional). The package is using three libraries including "dplyr", "plyr" and "plotly". The Fig.\ref{fig:table} shows trap reference point image, cell areas image, image of cell distance from reference point and $\mu$Polar dataset formation. The cell areas and RLS data could be included to the input dataset optionally. The "$\mu$Polar" function takes time-lapse dataset, time (image time number), distance (reference-cell), area (cell area equals to "NA" if the area is not available), offset (adjustment value for gap between cells and plot out layer. It should initially equal to "NA"), adjust (adjustment of cell size based on available cell area. It should initially equal to "NA"), track (color code cell tracking and should be set to "FALSE" or "TRUE") and RLS (replicative lifespan based on available RLS dataset. It should be set to "NA" if the data is not available). The package is setup for up to 12 color codes categorizing number of available cells at each time-point and and cells with distance. Any number above 12 would be a random color. The color codes are adjustable and could be vary for different image types. For initial result, area, offset, adjust, track and RLS could be set to "NA" (e.g. $\mu$Polar package example).  
 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/table.pdf}
-\caption{ A sub-image with label for distance and area at time-point 1. A sample table of $\mu$Polar data format at two time-points.}
+\caption{ \textbf{ $\mu$Polar input dataset formation}. A sub-image labeled with distance and area at time-point 1 including a sub-image with reference point. A sample table of $\mu$Polar data format at time-point 1.}
 \label{fig:table}
 \end{figure*}
 
 
-\subsection{$\mu$Polar for microfluidics images}
 
+\subsection{Apply $\mu$Polar function for plotting}
 
-We have applied $\mu$Polar package to our available traps dataset. Fig.\ref{fig:compare} shows the results for trap 1, trap 12, trap 22, trap 41, trap 50, trap 59, trap 73, trap 82, trap 90, trap 92. We chose these traps based on investigation of cell development at early ,middle and late levels. In these images, each color  represents a number of cells, The white, black, light blue, pink, green, purple, orange colors are representing 0 cell (blank trap),1 cell, 2 cells, 3 cells, 4 cells, 5 cells and 6 cells respectively. 
-The Fig.\ref{fig:compare} illustrates that a trap with two cell is most dominating occurrence event for most of traps. following by pink color. In addition, overcrowded events occurred for most of traps at different time-points regardless of trap location. For example, TP1 represents the time-lapse visualization of trap 1 where cell division occurred normally at bi beginning  between cells inside trap and at the trap outlet. Gradually, the development process shifts where there a cell inside trap and growing number of cells above that and become overcrowded later on based on color representation for each number of cells. The continuous black dots for TP73, TP82 and TP90 indicate that there is a single cell inside trap, cell grown in size and has been occurring for sometimes. These events could be consider as senescence cell stage or dead cell stage.       
-
-
-
+Fig.\ref{fig:explain} demonstrates an overview of $\mu$Polar package arguments for a single trap time-points. The first argument is the time-lapse dataset that includes time, distance, area(optional) and RLS (optional) which are required for initial visualization (Fig.\ref{fig:explain}(a)). The second argument requires the time column number from the dataset and the third argument requires distance column number from the dataset. The third argument requires the cells area column number and can be set to "NA" if the area is unavailable. The default setting for the cell area is five. The fourth argument requires offset vale for adjusting the gap between the maximum cell radius of the plot and plot out layer. The Fig.\ref{fig:explain}(c)) shows when "offset" set to 10 which initially set to "NA". This option is useful when there is an overcrowded region on the plot. The fifth argument relates to adjusting cell areas when the area of the cells is available. Fig.\ref{fig:explain}(d)) shows when the "adjust" set to 10 when initially set to "NA". The sixth argument is for color cell tracking which can be applied "FALSE or "TRUE" (Fig.\ref{fig:explain}(e)). The last argument requires RLS dataset column number (otherwise "NA") and can be represented on the plot as "red star" as shown in (Fig.\ref{fig:explain}(f).
 
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/compare.pdf}
-\caption{  $\mu$Polar visualization for several traps from microfluidics images.}
-\label{fig:compare}
-\end{figure*}
-
-
-
-
-
-Cell area and offset features could be used for better plot analysis. The cell area could be set to "NA" if the cell area information is not available. Furthermore, the offset value is to adjust the gap between the maximum radius of the dataset and plot out layer. This option could initially set to "NA" and change later on to improve visualization. Fig.\ref{fig:areaoff}(a1) shows a $\mu$polar plot with cell area and offset are equaled to "NA". Fig.\ref{fig:areaoff}(a2) shows $\mu$polar plot with offset value set to 8 where the gap between the maximum radius and plot out layer increase by 8 units. Fig.\ref{fig:areaoff}(b1, b2) show $\mu$polar plot with cell area size decreased and increased by 2 and 8 units respectively. These options are useful for controlling over-size cells and monitoring cell dynamic shape, in particular, if there is no division and cell reached its senescent or over-crowded cells stage.    
-
-\begin{figure*}
-\centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/area_offset.pdf}
-\caption{ Example of $\mu$Polar for offset and area features. (a1) and (a2) are related to offset feature example adjusting the cap between cells and plot out layer. (b1) and (b2) are related to area feature example with can be adjustable for better visualization.}
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/option.pdf}
+\caption{ \textbf{ $\mu$Polar function inputs adjustment for data, time, distance, area, offset, adjust, track and RLS}. (a) Initial $\mu$Polar plot without adjustment. (b) $\mu$Polar interactive feature. (c) The "offset" set to 10. (d) The area of cells is available and the "adjust" set to 10. (e) The "track" set to "TRUE". (f) the RLS of dataset is available and represented by "red star".}
 \label{fig:areaoff}
 \end{figure*}
 
-\subsection{$\mu$Polar for microscopic images}
-In addition to the microfluidics images, we also investigated the $\mu$Polar plot result in the microscopic image. We collected 37 time-lapse microscopic images (dimension = 307x306) from \cite{ref05} as shown in Fig.\ref{fig:scopic}(a). The number of available cells in each image is in range of 50 - 70. For simplicity of plotting, a section of these images cropped in dimension of 121x121 based on average cells availability in a region of interest. (Fig.\ref{fig:scopic}(b)). Correspondingly, feature extraction applied to these images collecting cells coordinate of each image in order of time. According to observation, the cells gradually tend to move to the left direction of images over the time. Thus, the reference point selected at the left-side of images edge (2,150) calculating cell distance. Fig.\ref{fig:scopic}(c) illustrates the $\mu$Polar plot where the cells number are in the range of 6 - 12 indicating different color code. Since the number of cells is 37, the color indication shows a great visualization of cell movement variation. This is very useful for cell monitoring, counting RLS and cell tracking. For instance, the comparison between the closest cell to the center-point at time-point 1 and closest cell to center-point at time-point 37 shows that the amount of cell movement from time-point 1 to time-point 37 is approximately 20 units.        
 
-\begin{figure*}
-\centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/microscopic.pdf}
-\caption{ An example of time-lapse microscopic images applying  $\mu$Polar.}
-\label{fig:scopic}
-\end{figure*}
-
-
-\section{Discussion}
+\subsection{Analysing $\mu$Polar plot}
 
 Fig.\ref{fig:read} is an overview of some prevalently events from yeast cells time-lapse microfluidics images. Each of the sub-figures is a representation of most common events during the experimental work which can be visualized by $\mu$Polar. The event (a) is representing traps without any present cells which commonly occurs for traps close to the bottom of microfluidics device due to shorten cell life-cycle. The event (b) portends the upcoming division event from potentially mC located inside the trap with a bud at trap outlet. This estimation is based on distance visualization between two cells (mc and bud). In the next event (c), the black dots representing single-cell separation cycle  occurred after bud increased in size the single-cell remains inside the trap. The event (d) shows a single cell inside the trap growing in size. This is most common at the end of the cell lifespan. The (e) and (f) events are good visualization examples of cell division at the absence of a single cell which arguably notifies the occurrence of cell division. In the (e) event, the arrow on the Up region indicates that single-cell inside the trap (black dot) started division and there is not much cell development in size. However, the two arrows indicate that there is a cell attached to the cell inside the trap and its size growing gradually until complete the division cycle, we called this "dC below mC" situation. The (f) event illustrates similar development in the opposite direction when a single call is in steady position and cell above it is growing gradually, we also called this "dC above mC" situation. The (g) demonstrates an event there two cells have been close to each other for sometimes without much development. we realized that this situation occurs when cells becoming older and interestingly the cell separation cycle becoming longer. $\mu$Polar could potentially be a great Visualization tool to compare a cell separation cycle time at its early lifespan and cell separation cycle time at its late lifespan. The (h) shows overcrowded events when the number of cells in the image reaches more than two cells where each color representing a different number of cells.
 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/read.pdf}
-\caption{Readability of some common cellular events for yeast cells. Any event occurred below the reference line (passed trap outlet) denoted as "Down" and any events occurred above the reference line (inside and above trap) denoted as "Up". (a) The white dots (pointed with arrow) on the red reference line are indications of the trap without cell. (b) The two arrows pointing each other are indicating that a single cell (black dot) started a division, cells are at an early age and very close to each other (one inside the trap, one outside trap outlet). (c) The Black dots are representing a division after two cells completed the separation cycle. (d) The representation of a single cell inside trap growing size over time. (e) The arrow on the Up region indicates that there a cell inside trap without much growing in size. That arrows on down region indicate that there is a single cell below and close to the cell inside the trap and gradually growing in size until complete separation which we called this even "dC below mC". (f) The arrow on down region indicates that there is a single cell inside trap without much growing in size. The two arrows are indicating that there is a cell above and close to the cell inside the trap and growing in size until complete separation which we called this event "dC above mC". (g) The arrows show two cells attached inside the trap and have not completed the separation cycle for sometimes. (h) Indication of the events of the overcrowded cell occurred sometimes.(h) Indication of the over crowded cells events occurred for sometimes.}
+\caption{\textbf{ Readability of some common cellular events}. Any event occurred below the reference line (passed trap outlet) denoted as "Down" and any events occurred above the reference line (inside and above trap) denoted as "Up". (a) The white dots (pointed with arrow) on the red reference line are indications of the trap without cell. (b) The two arrows pointing each other are indicating that a single cell (black dot) started a division, cells are at an early age and very close to each other (one inside the trap, one outside trap outlet). (c) The Black dots are representing a division after two cells completed the separation cycle. (d) The representation of a single cell inside trap growing size over time. (e) The arrow on the Up region indicates that there a cell inside trap without much growing in size. That arrows on down region indicate that there is a single cell below and close to the cell inside the trap and gradually growing in size until complete separation which we called this even "dC below mC". (f) The arrow on down region indicates that there is a single cell inside trap without much growing in size. The two arrows are indicating that there is a cell above and close to the cell inside the trap and growing in size until complete separation which we called this event "dC above mC". (g) The arrows show two cells attached inside the trap and have not completed the separation cycle for sometimes. (h) Indication of the events of the overcrowded cell occurred sometimes.(h) Indication of the over crowded cells events occurred for sometimes.}
 
 \label{fig:read}
 \end{figure*}
+
+
+
+
+
+\subsection{$\mu$Polar for microfluidics images}
+
+We have applied $\mu$Polar package to our available traps dataset. Fig.\ref{fig:compare} shows the results for trap 1, trap 12, trap 22, trap 41, trap 50, trap 59, trap 73, trap 82, trap 90, trap 92. We chose these traps based on the investigation of cell development at early, middle and late levels. In these images, each color represents a number of cells, The white, black, light blue, pink, green, purple, orange colors are representing 0 cells (blank trap),1 cell, 2 cells, 3 cells, 4 cells, 5 cells, and 6 cells respectively. 
+Fig.\ref{fig:compare} illustrates that a trap with two cells is the most dominating occurrence event for most of the traps. following by pink color. In addition, overcrowded events occurred for most of the traps at different time-points regardless of trap location. For example, TP1 represents the time-lapse visualization of trap 1 where cell division occurred normally at the beginning between cells inside the trap and at the trap outlet.  The process gradually develops and shifts where there a cell inside the trap and the growing number of cells above that and becomes overcrowded later on based on color representation for each number of cells. The continuous black dots for TP73, TP82, and TP90 indicate that there is a single cell inside the trap, cell grown in size and has been occurring sometimes. These events could be considered as senescence cell stage or dead cell stage.         
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/compare.pdf}
+\caption{ \textbf{ $\mu$Polar visualization for several traps from microfluidics images}.}
+\label{fig:compare}
+\end{figure*}
+
+
+
+\subsection{$\mu$Polar for microscopic images}
+
+In addition to the microfluidics images, we also investigated the $\mu$Polar plot result in the microscopic image. We collected 37 time-lapse microscopic images (dimension = 307x306) from \cite{ref05} as shown in Fig.\ref{fig:scopic}(a). The number of available cells in each image is in range of 50 - 70. For simplicity of plotting, a section of these images cropped in dimension of 121x121 based on average cells availability in a region of interest. (Fig.\ref{fig:scopic}(b)). Correspondingly, feature extraction applied to these images collecting cells coordinate of each image in order of time. According to observation, the cells gradually tend to move to the left direction of images over the time. Thus, the reference point selected at the left-side of images edge (2,150) calculating cell distance. Fig.\ref{fig:scopic}(c) illustrates the $\mu$Polar plot where the cells number are in the range of 6 - 12 indicating different color code. Since the number of cells is 37, the color indication shows a great visualization of cell movement variation. This is very useful for cell monitoring, counting RLS and cell tracking. For instance, the comparison between the closest cell to the center-point at time-point 1 and closest cell to center-point at time-point 37 shows that the amount of cell movement from time-point 1 to time-point 37 is approximately 20 units.        
+
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/microscopic.pdf}
+\caption{ \textbf{ An example of time-lapse microscopic images applying  $\mu$Polar}.}
+\label{fig:scopic}
+\end{figure*}
+
+
+
+
+\section{Discussion}
+
+
 
 Fig.\ref{fig:explain} demonstrates an overview of a single trap for the cells division process over time. In this $\mu$Polar plot, cells are shown in five colors, black color represents single mother cell(mC), light blue represents two cells, pink color represents three cells, green color represents four cells and purple color represents five cells. We considered this plot with six stages over time-point 1 to time-point 391. At stage one (0 - 170 degree), the light blue color representing traps with presents of two cells where the mother cell (mC) is located inside the trap and the daughter cell (dC) passed reference line (red line) located at trap outlet. At stage two (170 - 190 degree), the mC remains inside the trap and the dC located above mC.  An example of these stages is illustrated in Fig.\ref{fig:explain}. At stage three (190 - 260 degree), multiple colors representation show that there is an over-crowded situation inside and above the trap. AT stage five ( 260 - 350 degree), there are constantly two cells available inside the trap and there is no sign of division or development. Potentially, this is the cell senescence stage and follows by cell dead stage. The comparison of stage one and stage two shows that the distance between two cells is increased, no single cell passed trap outlet and cell size is bigger representing old cells    
 
@@ -154,9 +165,12 @@ Fig.\ref{fig:explain} demonstrates an overview of a single trap for the cells di
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/explain.pdf}
-\caption{A trap example analysis with $\mu$Polar plot for time-points 1 - 391.}
+\caption{ \textbf{A trap example analysis with $\mu$Polar plot for time-points 1 - 391}.}
 \label{fig:explain}
 \end{figure*}
+
+
+
 
 
 \subsection{$\mu$Polar RLS}
@@ -165,8 +179,8 @@ $\mu$Polar has an additional option for replicative lifespan (RLS) visualization
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/rls10.pdf}
-\caption{ Identify the number of RLS from $\mu$Polar without RLS dataset. (a) A $\mu$Polar plot from a trap with prior RLS counting dataset represented by "stars". (b) A $\mu$Polar plot for same trap without collected RLS dataset represented by "triangle" counted from plot division points.}
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/rlsTp1.pdf}
+\caption{ \textbf{Identify the number of RLS from $\mu$Polar}. The "black arrows" are indicating the potential number of yeast cell division time-points from given experimental results (Estimate counting: 21). The "red stars" are indicating the number division time-points that can be identified by $\mu$Polar plot (Estimate counting: 20).}
 \label{fig:rls}
 \end{figure*}
 
@@ -175,7 +189,7 @@ Fig.\ref{fig:division} represents a situation that could lead to RLS miscounting
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/division.pdf}
-\caption{ Representation of microfluidics time-lapse images from time-points 30 to 59 with number of available cell(s). The time-point 35(pink) indicates the number of cells decreasing from three to two. Time-points 47 to 48 indicate the occurrence of cell division. The time-point 53 represents a single cell inside trap (black).}
+\caption{ \textbf{ Representation of microfluidics time-lapse images from time-points 30 to 59 with number of available cell(s)}. The time-point 35(pink) indicates the number of cells decreasing from three to two. Time-points 47 to 48 indicate the occurrence of cell division. The time-point 53 represents a single cell inside trap (black).}
 \label{fig:division}
 \end{figure*}
 
@@ -188,7 +202,7 @@ The microfluidics sequence images are procured from \cite{ref13} recent experime
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/fluidics.pdf}
-\caption{ HYAA microfluidics chips. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
+\caption{ \textbf{HYAA microfluidics chips}. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
 \label{fig:micro}
 \end{figure*}
 
@@ -237,70 +251,76 @@ Fig.\ref{fig:polar}(b) shows a schematic of $\mu$Polar with some sample time-poi
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/polar.pdf}
-\caption{A schematic and plot examples of $\mu$Polar. (a) $\mu$Polar plot representation of microfludics time-lapse images from time-points 1 - 391. (b) $\mu$Polar schematic representation for time-lapse images from time-points 1 - 6 with indication of number of cell(s) with color codes.}
+\caption{ \textbf{ A schematic and plot examples of $\mu$Polar}. (a) $\mu$Polar plot representation of microfludics time-lapse images from time-points 1 - 391. (b) $\mu$Polar schematic representation for time-lapse images from time-points 1 - 6 with indication of number of cell(s) with color codes.}
 \label{fig:polar}
 \end{figure*}
 
 
 \section{Conclusion}
-Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices.
-This software is implemented in an R package $\mu$Po available through GitHub from https://github.com/merang/uPolar.
+Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. This software is implemented in an R package $\mu$Po available through GitHub from https://github.com/merang/uPolar.
 
-
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth,height=10 cm]{Patterns/cellSteps.pdf}
-% \caption{ An example of time-lapse microfluidics images.}
-% \label{fig:imageData}
-% \end{figure*}
-
- 
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp8.pdf}
-% \caption{ An example of time-lapse microfluidics image (Beacon08 Trap08).}
-% \label{fig:imageData}
-% \end{figure*}
-
-
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp30.pdf}
-% \caption{ An example of time-lapse microfluidics images (Beacon08 Trap30).}
-% \label{fig:imageData}
-% \end{figure*}
-
-
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp75.pdf}
-% \caption{ An example of time-lapse microfluidics images (Beacon08 Trap75).}
-% \label{fig:imageData}
-% \end{figure*}
-
-
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp100.pdf}
-% \caption{ An example of time-lapse microfluidics images (Beacon08 Trap100).}
-% \label{fig:imageData}
-% \end{figure*}
 
 
 \section{Supplemental Information}
 
+
+
+
 \paragraph*{S1 Fig.}
 \label{S1_Fig}
-{\bf  Cell distance calculation method.} (a) trap reference point. (b) an example of cell distance from reference point. (c) Sample of some images with labeled cells. 
+{\bf  $\mu$Polar visualization for Trap18 microfluidics images}. 
+
+
+ 
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp18.pdf}
+\caption{ \textbf{$\mu$Polar visualization for Trap08 microfluidics images}.}
+\label{fig:tp18}
+\end{figure*}
+
+
+\paragraph*{S2 Fig.}
+\label{S4_Fig}
+{\bf  $\mu$Polar visualization for Trap30 microfluidics images}. 
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp30.pdf}
+\caption{  \textbf{$\mu$Polar visualization for Trap030 microfluidics images}.}
+\label{fig:tp30}
+\end{figure*}
+
+
+\paragraph*{S3 Fig.}
+\label{S3_Fig}
+{\bf $\mu$Polar visualization for Trap62 microfluidics images}. 
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp62.pdf}
+\caption{ \textbf{$\mu$Polar visualization for Trap62 microfluidics images}.}
+\label{fig:tp62}
+\end{figure*}
+
+
+\paragraph*{S4 Fig.}
+\label{S6_Fig}
+{\bf  $\mu$Polar visualization for Trap102 microfluidics images}. 
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8_tp102.pdf}
+\caption{  \textbf{$\mu$Polar visualization for Trap102 microfluidics images}.}
+\label{fig:tp102}
+\end{figure*}
 
 
 
+% \paragraph*{S1 Table.}
 
-
-\paragraph*{S1 Table.}
-
-\label{S1_Table}
-{\bf Grid search and augmentation options.} A total of 108 combinations were trained without and with augmented dataset. 
+% \label{S1_Table}
+% {\bf ............} 
 
 
 \subsection*{Acknowledgment}
@@ -309,6 +329,7 @@ The work is partially supported by the NSF CAREER award \#1453078 (transferred t
 
 
 \subsection*{Author contributions}
+
 
 
 \subsection*{Declaration on interests}
@@ -327,7 +348,6 @@ WOLLMANR., STUURMANN.: High throughput microscopy:From raw images to discoveries
 
 \bibitem{r2.6}
 Oates, A. C., Gorfinkiel, N., Gonzalez-Gaitan, M. & Heisenberg, C.-P. Quantitative approaches in developmental biology. Nat. Rev. Genet. 10, 517–530 (2009).
-
 
 
 \bibitem{r2.7}
@@ -360,8 +380,6 @@ Ghayesh MH (2018) Mechanics of tapered AFG shear-deformable microbeams. Microsys
 Shafiee H, Jahangir M, Inci F, Wang S, Willenbrecht RB, et al. (2013) Acute on-chip HIV detection through label-free electrical sensing of viral nano- lysate. Small 9(15): 2553-2563.
 
 
-
-
 \bibitem{r3}
 JENSENE. C.: Overview of live-cell imaging: Require-ments and methods used.The Anatomical Record 296, 1 (2013),1–8
 
@@ -370,14 +388,11 @@ JENSENE. C.: Overview of live-cell imaging: Require-ments and methods used.The A
 V. Longo, G. Shadel, M. Kaeberlein and B.  Kennedy, Replicative and Chronological Aging in Saccharomyces cerevisiae, Cell Metabolism, 2002,16(1):18-31.
 
 
-
-
 \bibitem{ref02}
 R. Eilsand and C. Athale, Computational imaging in cell biology, Cell Biol.2003, 16: 477-48.
 
 \bibitem{ref02.2}
 M. Ghafari,  et al. , Prototyping a family tree algorithm to estimate yeast replicative lifespan from time-lapse microfluidic images, IEEESouthEastConf. 2020, (awaiting for publication)
-
 
 
 \bibitem{ref03}
@@ -462,42 +477,6 @@ Z. Zhao, P. Zheng, S. Xu, and X Wu, Object Detection With Deep Learning: A Revie
 
 
 \end{thebibliography}
-
-
-
-% We provide a concise description of live cell imaging in Section 
-% 2. Next, in Section 
-% 3, we describe our analytical approach. Based on this, Section 
-% 4 contains the results of a systematic analysis of visualization methods cell imaging. 
-% This includes reports on domain and data characterization (Section 4.1),
-% task abstraction (Section 4.2), and
-% visual encoding and interaction design (Section 4.3).
-% We discuss the implications of our analysis,including a number of research gaps, in Section 5
-% conclude with Section 6.
-
-
-%https://www.osti.gov/servlets/purl/1557948
-%https://onlinelibrary.wiley.com/doi/epdf/10.1111/cgf.12784
-
-
-
-% Imaging of fluorescently labeled proteins in living cells provides spatial and temporal information on their subcellular localization. This is essential to understand their role in dynamic processes such as cell division. In addition, time-lapse microscopy allows direct analysis of the correlation (or lack thereof) between distinct events at the single cell level, which could be masked in bulk population studies such as time-courses of synchronized cultures. Such correlations might reveal functional relationships, coordination of events in space and time, and feedback regulatory loops (see [1] for a detailed discussion of these topics).
-% In budding yeast cells, the site of cytokinesis (termed the bud neck) is marked by the presence of a membrane-associated, septin- based collar [2]. Cytokinesis begins at the end of mitosis when the septin collar splits into two rings, defining a compartment where actomyosin ring contraction takes place [3]. Closure of this con- tractile ring and septum deposition drive the overlying plasma membrane inward, in a process akin to furrow ingression in animal cells (see [4, 5] for reviews). The ring then disassembles, allowing fission of the contracted membrane, in a process termed abscission [3]. After completion of cytokinesis, cell wall degradation at the septation site allows separation of mother and daughter cells [6]. Here, we describe optimized methods to image multiple cytokinesis events in living yeast cells, namely septin ring dynamics, acto- myosin ring contraction, and plasma membrane ingression at the mother–bud neck.
-
-% Time-lapse imaging files are relatively large and it is therefore useful to ensure that enough memory space and computer processing power are available to process them (each of the image fields in the above example represent 1200 [20×60] frames for each channel, between 0.5 and 1.5 GB in size).
-
-%https://link.springer.com/content/pdf/10.1007%2F978-1-4939-3145-3.pdf
-
-
-
-
-
-
-
-
-
-
-
 
 
 
