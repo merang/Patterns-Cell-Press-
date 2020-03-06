@@ -134,12 +134,12 @@ We have applied $\mu$Polar visualization tool to 104 traps time-lapse images. Fi
 \end{figure*}
 
 
-Moreover, we evaluated some of $\mu$Polar plot from different trap numbers at different time-point with the corresponding image. For instance, S1\_Fig shows $\mu$Polar visualization of trap 8 at time-point 109. The plot indicates three cells (pink color)in the image that two cells are above reference point and single-cell is far below the reference point which considers as noise in this image. In another example, the S2\_Fig demonstrates trap 33 at time-point 11 when there are two cells available in the image. This is the early time-point of cell division when two cells (sky blue color) are very close to each other. On the other hand, the S3\_Fig demonstrates that there are two cells (sky blue color) reaching the end of the cell separation cycle according to the distance of the cells which corresponds to the number of cells in the image. The S4\_Fig illustrates a very interesting $\mu$Polar plot of trap 63 at time-point 340. The image shows that the cell is arguably at early development time-point, however, the $\mu$Polar plot indicates that the cell has been at this level for sometimes and considered as cell senescence time-point. In this research work, we tried to avoid the duplication of trap visualization, hence, most of the  given examples are from different trap number of microfluidics images.    
+Moreover, we evaluated some of $\mu$Polar plot from different trap numbers at different time-point with the corresponding image. For instance, \nameref{S1\_Fig} shows $\mu$Polar visualization of trap 8 at time-point 109. The plot indicates three cells (pink color)in the image that two cells are above reference point and single-cell is far below the reference point which considers as noise in this image. In another example, the \nameref{S2\_Fig} demonstrates trap 33 at time-point 11 when there are two cells available in the image. This is the early time-point of cell division when two cells (sky blue color) are very close to each other. On the other hand, the \nameref{S3\_Fig} demonstrates that there are two cells (sky blue color) reaching the end of the cell separation cycle according to the distance of the cells which corresponds to the number of cells in the image. The \nameref{S4\_Fig} illustrates a very interesting $\mu$Polar plot of trap 63 at time-point 340. The image shows that the cell is arguably at early development time-point, however, the $\mu$Polar plot indicates that the cell has been at this level for sometimes and considered as cell senescence time-point. In this research work, we tried to avoid the duplication of trap visualization, hence, most of the  given examples are from different trap number of microfluidics images.    
 
 
 \subsection{$\mu$Polar for microscopic images}
 
-In addition to the microfluidics-based microscopic images, we also utilized the $\mu$Polar to visualization the migrating mouse fibroblasts from images. We collected 37 time-lapse microscopic images (307x306) from \cite{ref05} as shown in Fig.\ref{fig:scopic}(a). The number of available cells in each image is in a range of 50 - 70 depending on the image time-point. For simplicity of the plotting, a section of these images cropped in the dimension of 121x121 based on average cell availability in a region of interest (Fig.\ref{fig:scopic}(b)). Correspondingly, feature extraction applied to these images collecting cells coordinate of each image in order of time. According to the observation, the cells are gradually migrating to the left direction of images over time. Thus, the reference point was chosen at the left-side edge of images (2,150) calculating cell distance. Fig.\ref{fig:scopic}(c) illustrates the $\mu$Polar plot where the cells number are in a range of 6 - 10 indicating by different color code. The "sky blue" color represents availability of 6 cells at the present time-point, the "light brown" color represents availability of 8 cells at the present time-point, the "light blue" color represents availability of 9 cells at the present time-point and the "purple" color represents availability of 10 cells at the present time-point. Fig.\ref{fig:scopic}(d) demonstrates cell size variation and cell tracking based on color labelling. For instance, the comparison between the closest cell to the center-point at time-point 1 (dark-red) and closest cell to center-point at time-point 37 (dark-red) shows that the cell migration from time-point 1 to time-point 37 is approximately 20 units. Since the number of images is 37,  $\mu$Polar color code indication shows a great visualization of cells corresponding to the movement and size variation. This is very useful for cell monitoring, counting division and cell tracking.       
+In addition to the microfluidics-based microscopic images, we also utilized the $\mu$Polar to visualization the migrating mouse fibroblasts from images. We collected 37 time-lapse microscopic images (307x306) from \cite{ref05} as shown in Fig.\ref{fig:scopic}(a). The number of available cells in each image is in a range of 50 - 70 depending on the image time-point. For simplicity of the plotting, a section of these images cropped in the dimension of 121x121 based on average cell availability in a region of interest (Fig.\ref{fig:scopic}(b)). Correspondingly, feature extraction applied to these images collecting cells coordinate of each image in order of time. According to the observation, the cells are gradually migrating to the left direction of images over time. Thus, the reference point was chosen at the left-side edge of images (2,150) calculating cell distance. Fig.\ref{fig:scopic}(c) illustrates the $\mu$Polar plot where the cells number are in a range of 6 - 10 indicating by different color code. The "sky blue" color represents availability of 6 cells at the present time-point, the "light brown" color represents availability of 8 cells at the present time-point, the "light blue" color represents availability of 9 cells at the present time-point and the "purple" color represents availability of 10 cells at the present time-point. The cell size variation and cell tracking are based on color labelling. For instance, the comparison between the closest cell to the center-point at time-point 1 (dark-red) and closest cell to center-point at time-point 37 (dark-red) shows that the cell migration from time-point 1 to time-point 37 is approximately 20 units. Since the number of images is 37, $\mu$Polar color code indication shows a great visualization of cells corresponding to the movement and size variation. This is very useful for cell monitoring, counting division and cell tracking visualization.      
 
 
 \begin{figure*}
@@ -195,22 +195,19 @@ Overall, the $\mu$Polar is a simple and useful tool for visualization of cell mi
 \section{Star*Methods}
 
 \subsection*{Data collection}
-The microfluidics sequence images are procured from \cite{ref13} recent experimental work. The high-throughput yeast aging analysis (HYAA) chips device is a composed Polydimethylsiloxane (PDMS) model that contains 16 individual channels combined into four modules as shown in Fig.\ref{fig:micro}(a).
+The microfluidics sequence images are procured from \cite{ref13} recent experimental work. The high-throughput yeast aging analysis (HYAA) chips device is a composed Polydimethylsiloxane (PDMS) model that contains 16 individual channels combined into four modules as shown in \nameref{S5\_Fig}(a).
 
-\begin{figure*}
-\centering
-\includegraphics[width=\textwidth,height=10 cm]{Patterns/fluidics.pdf}
-\caption{ \textbf{HYAA microfluidics chips}. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
-\label{fig:micro}
-\end{figure*}
 
-All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at a temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside the microfluidic chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing guidelines. The order of rows could be different depending on capturing adjustment. For instant, if the camera positioned on guidelines 10 and 20, the first row of the captured image starts with 7 traps and so on. The experiment ended with capturing 391 images with 10 minutes interval. Images are captured at four locations of the microfluidic device ( Fig.\ref{fig:micro}(b)). 1st position: camera covered guidelines 10 - 20. 2nd position: camera covered guidelines 30 - 40. 3rd position: camera covered guidelines 50 - 60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position (10 - 20) as shown in Fig.\ref{fig:micro}(c).
+
+All time-lapse microfluidics images are captured with IX-81 Olympus inverted microscope equipped with an Olympus camera (DP72 CCD) operating by cellSens software. The experimental process took around 96 hours at a temperature of 86$^{\circ}$F (30$^{\circ}$C). Each channel has 520 traps inside the microfluidic chamber and each row has 7 or 6 traps consecutively. Channels are labeled with numbers right-side for capturing guidelines. The order of rows could be different depending on capturing adjustment. For instant, if the camera positioned on guidelines 10 and 20, the first row of the captured image starts with 7 traps and so on. The experiment ended with capturing 391 images with 10 minutes interval. Images are captured at four locations of the microfluidic device (\nameref{S5\_Fig}(b)). 1st position: camera covered guidelines 10 - 20. 2nd position: camera covered guidelines 30 - 40. 3rd position: camera covered guidelines 50 - 60. 4th position: camera covered guideline 70. In this work, we have considered the dataset from 1st position (10 - 20) as shown in \nameref{S5\_Fig}(c).
+
+
 
 \subsection{Data Pre-processing}
-Since microfluidics images have relatively low resolution and are considered a challenging task for visualization, we partitioned every single image to sub-images based on the individual trap. Traps are labeled from time-point 1 to time-point 391 as illustrated in Fig.\ref{fig:micro}. All sub-images partitioned concerning local traps boundary at 60x60 dimension. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image feature extraction. We collected 391 sequence sub-images for each trap, extract and label them as following: "time" (image time number), "distance (cell distance from reference point) and cell "area" (Fig.\ref{fig:table}). The cell features in each image are collected in no particular order (e.g, cell size, location). However, the features of each image are collected in order of time. For instance, Fig.\ref{fig:table} shows that the features of the first image input with four cells are collected indicating four rows for each cell and assigning time number (time) one for all of them. This labeling method continuously followed for the rest of the images.
+Since microfluidics images have relatively low resolution and are considered a challenging task for visualization, we partitioned every single image into sub-images based on the individual trap position. Traps are labeled from time-point 1 to time-point 391 as illustrated in \nameref{S5\_Fig}(d).All sub-images partitioned concerning local traps boundary at 60x60 dimension. We used You Only Look Once (YOLOv3) \cite{ref20} machine learning model for image feature extraction. We collected 391 sequence sub-images for each trap, extract and label them as following: "time" (image time number), "distance (cell distance from reference point) and cell "area" (Fig.\ref{fig:table}). The cell features in each image are collected in no particular order (e.g, cell size, location). However, the features of each image are collected in order of time. For instance, Fig.\ref{fig:table} shows that the features of the first image input with four cells are collected indicating four rows for each cell and assigning time number (time) one for all of them. This labeling method continuously followed for the rest of the images.
 
 \subsection{Distance calculation and time-points conversion}
-The process of feature extraction carried on for 104 available traps as illustrated in Fig.\ref{fig:micro}(c). We then surcharged individual cell distance feature from the existing dataset by using the euclidean equation:
+The process of feature extraction carried on for 104 available traps as illustrated in \nameref{S5\_Fig}(c). We then surcharged individual cell distance feature from the existing dataset by using the euclidean equation:
 
 \begin{equation}
 \begin{split}
@@ -243,8 +240,6 @@ Fig.\ref{fig:table} illustrates an example of traps at time-points 1 and 2. Time
 
 Fig.\ref{fig:polar}(a) is an interpretation of a trap sequence images from time-point 1 to time-point 391. The color representation is based on the number of available cell(s) in an image. Here, we used default setting where white color represents trap without cell, black color represents trap with one cell, green color represents trap with two cells, light-brown represents trap with 3 cells, blue color represents trap with 4 cells, orange color represents trap with 5 cells and sky-blue color represents trap with more than 5 cells. Furthermore, the red circle color represents trap reference line. For instance, time-point 275 to time-point 313 and time-point 353 to time-point 360 are represented in white color and laid on reference line (red). $ t  $ and  $ Ce $  are image time-point number and number of available cell(s) respectively. An example of $\mu$Polar plot given at time-point 21 where cell color shown in black since there only single-cell available. 
 
-Fig.\ref{fig:polar}(b) shows a schematic of $\mu$Polar with some sample time-points from a trap. Images at time-points 1 - 6 are represented in $\mu$Polar plot. The theta for time-points 1 - 6 are 0 ,0.92, 1.84, 2.76, 3.68, 4.6 respectively. The plot has two regions separated with red circle, denoted as $ A $ region (cell above reference line) and $ B $ region (cell below reference). In this example, "White" color represents traps without cell located on reference line based on image theta, "black" color represents traps with single-cell located on radius line based on cell distance and image theta, "green" color represents traps with two cells located on radius line based on cell distance and image theta and "orange" color represents traps with three cells located on radius line based on cell distance and image theta. The cell size variation is based on the cell area. The number of cell(s) on each time-point radius indicates the number of cell (s) on each image. For instance, there is no cell at time-point 1, there are two cells at time-point 2, three cells at time-point 3, three cells at time-point 4, two cells at time-point 5 and one cell at time-point 6 respectively
-
 
 \begin{figure*}
 \centering
@@ -254,13 +249,15 @@ Fig.\ref{fig:polar}(b) shows a schematic of $\mu$Polar with some sample time-poi
 \end{figure*}
 
 
+Fig.\ref{fig:polar}(b) shows a schematic of $\mu$Polar with some sample time-points from a trap. Images at time-points 1 - 6 are represented in $\mu$Polar plot. The theta for time-points 1 - 6 are 0 ,0.92, 1.84, 2.76, 3.68, 4.6 respectively. The plot has two regions separated with red circle, denoted as $ A $ region (cell above reference line) and $ B $ region (cell below reference). In this example, "White" color represents traps without cell located on reference line based on image theta, "black" color represents traps with single-cell located on radius line based on cell distance and image theta, "green" color represents traps with two cells located on radius line based on cell distance and image theta and "orange" color represents traps with three cells located on radius line based on cell distance and image theta. The cell size variation is based on the cell area. The number of cell(s) on each time-point radius indicates the number of cell (s) on each image. For instance, there is no cell at time-point 1, there are two cells at time-point 2, three cells at time-point 3, three cells at time-point 4, two cells at time-point 5 and one cell at time-point 6 respectively
+
+
 \section{Conclusion}
 Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. This software is implemented in an R package $\mu$Po available through GitHub from https://github.com/merang/uPolar.
 
 
 
 \section{Supplemental Information}
-
 
 \paragraph*{S1 Fig.}
 \label{S1_Fig}
@@ -287,7 +284,6 @@ Microfluidics-based microscopy is becoming an increasingly popular research tool
 % \end{figure*}
 
 
-
 \paragraph*{S3 Fig.}
 \label{S3_Fig}
 {\bf  visualization of trap71 with corresponding microfluidics image}. 
@@ -300,8 +296,6 @@ Microfluidics-based microscopy is becoming an increasingly popular research tool
 % \end{figure*}
 
 
-
-
 \paragraph*{S4 Fig.}
 \label{S4_Fig}
 {\bf visualization of trap71 with corresponding microfluidics image}. 
@@ -311,6 +305,19 @@ Microfluidics-based microscopy is becoming an increasingly popular research tool
 % \includegraphics[width=\textwidth,height=10 cm]{Patterns/bc8tp63.pdf}
 % \caption{ \textbf{$\mu$Polar visualization for Trap63 microfluidics images}.}
 % \label{S4_Fig}
+% \end{figure*}
+
+
+
+\paragraph*{S5 Fig.}
+\label{S5_Fig}
+{\bf HYAA microfluidics chips images}. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60). 
+
+% \begin{figure*}
+% \centering
+% \includegraphics[width=\textwidth,height=10 cm]{Patterns/fluidics.pdf}
+% \caption{ \textbf{HYAA microfluidics chips}. (a) Four modules (16 channels) microfluidic device. (b) A time-point sample of microfludics image shown with guidelines 10 - 70. (c) An example of time-lapse ( t1-t391) images for guidelines 10 - 20. (d) A sample of time-lapse (t1 - t391) partitioned images (60x60).}
+% \label{fig:micro}
 % \end{figure*}
 
 
