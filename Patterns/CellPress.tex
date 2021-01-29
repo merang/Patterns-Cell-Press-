@@ -21,13 +21,13 @@
 
 \begin{document}
 
-\title{ Application Note: $\mu$Polar \-- An Interactive 2D Visualization Tool for  Microfluidics and  Microscopic Time Series Images }
+\title{ Application Note: $\mu$Polar \-- An Interactive 2D Visualization Tool for  Microfluidic and  Microscopic Time Series Images }
 
-% \author{\IEEEauthorblockN{1\textsuperscript{st} Mehran Ghafari}
-% \IEEEauthorblockA{\textit{SimCenter, Dept. Computer Science and Engineering} \\
-% \textit{University of Tennessee, Chattanooga, USA}\\
-% ryg668@mocs.utc.edu}
-% \and
+ \author{\IEEEauthorblockN{1\textsuperscript{st} Mehran Ghafari}
+ \IEEEauthorblockA{\textit{SimCenter, Dept. Computer Science and Engineering} \\
+ \textit{University of Tennessee, Chattanooga, USA}\\
+ ryg668@mocs.utc.edu}
+ \and
 % \IEEEauthorblockN{2\textsuperscript{nd} Hao-Bo Guo}
 % \IEEEauthorblockA{\textit{SimCenter, Dept. Computer Science and Engineering} \\
 % \textit{University of Tennessee, Chattanooga, USA}\\
@@ -38,35 +38,75 @@
 % \textit{Baylor College of Medicine, Houston, USA}\\
 % Weiwei.Dang@bcm.edu}
 % \and
-% \IEEEauthorblockN{4\textsuperscript{th} Hong Qin}
-% \IEEEauthorblockA{\textit{SimCenter, Dept. Computer Science and Engineering}\\
-% {Dept. Biology, Geology and Enviromental Science} \\
-% \textit{University of Tennessee, Chattanooga, USA}\\
-% hong-qin@utc.edu}
-% }
+ \IEEEauthorblockN{4\textsuperscript{th} Hong Qin}
+ \IEEEauthorblockA{\textit{SimCenter, Dept. Computer Science and Engineering}\\
+ {Dept. Biology, Geology and Enviromental Science} \\
+ \textit{University of Tennessee, Chattanooga, USA}\\
+ hong-qin@utc.edu}
+ }
 
 \maketitle
 
 
 \begin{Summary}
-
 Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of cells division. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize the trends and patterns of the cell movements and cellular division events at different time-points. Our method is interactive and easy to use. We demonstrated the utility of our method by visualizing the events of dividing yeast cells and migrating mouse fibroblasts. Our method could be potentially applied to other types of microfluidic devices including microscopic images. This software is implemented in an R package $\mu$Polar\ available through GitHub.
-
 
 \end{Summary}
 
 
 \begin{IEEEkeywords}
-Microfluidics devices, microscopic data, cell distance, $\mu$Polar visualization 
+Microfluidics, microscopic,cell, visualization  $\mu$Polar visualization 
 \end{IEEEkeywords}
 
 \section{Introduction}
+
+% package advantages 
+
+% architectures come with various advantages.
+
+
+ % package limitation 
  
-The biological processes of cell lineage family tree that deployed in spatial and temporal are essential in the biomedical field including research, medicine and diagnosis a variety of diseases. Thus, quantitative analysis of cell behavior constructed on lineage tree tagged with appropriate measurements for the individual cell is the imperative basis for understanding the dynamics and structure of organisms \cite{r2.6}. Comprehensive and detailed information considering cell locality position, pathway, nucleus, formation, dissection, replicative and chronological lifespan can potentially be concluded from images using a combination of manual and automatic visualization tools \cite{r2.7}. Having an automatic tool that collects microscopic images and generates interactive visualization of the cell family tree with a quantitative comparison of cells would be a great requisite for many applications.\\
+% Despite these contributions, our models also has multiple limitations
+% that provide useful opportunities for future work.
+% First, a major limitation of binning observations into the four
+% time bins is loss of information on short-term irregularities. For instance,
+% conditions such as heart arrhythmias can only be identified
+% when analyzing high resolution heart rate data. Averaging all values
+% within 8h bins removes any such high resolution patterns. Furthermore,
+% the DeepObserver model is difficult to interpret by medicine
+% practitioners being black-boxed in nature. Future research should
+% aim at producing more interpretable version of DeepObserver.
+% Second, ClinicalBERT_Multi use clinical notes to predict CCS
+% categories, thus inheriting all limitations from the ClinicalBERT
+ 
 
-In the recent decade, crucial breakthroughs have been created and developed in the microscopy imaging of live-cell mechanisms such as fluorescent protein labeling, selective plane illumination microscopy (SPIM) and multiphoton laser scanning microscopy (MLSM)\cite{r2.7,r2.8}. Concurrently, many image processing algorithms have been developed for cell segmentation (e.g, semantic and instance), tracking and quantitative analysis \cite{r2.10}.\\
+% how to use package
+ 
+%  To use the python package first download the repository 3. Next
+% import the transform function from the mimic_fhir_transformation.py.
+% Then call the transform function with these inputs: input_path of
+% the original MIMIC-III table CSV file, output_path of where you
+% would like to save the collection of FHIR resources as a JSON file.
+% Note that by adding the ’.gz’ extension the function can read compressed
+% CSV files and save compressed JSON files. The function then
+% saves the FHIR collection as a file and returns a Pandas DataFrame
+% with the flat hierarchy FHIR resources as rows. This allows the function
+% call to be directly incorporated into any python pre-processing
+% step. The MIMIC-III FHIR collections can then be combined with
+% FHIR collections from other EHR datasets and used to train robust
+% machine learning models.
+ 
+ 
+ 
+ 
+ 
 
-Since many of the experimental results from microscopic images are based on numerical numbers that require expertise to verify the validation of the outcome, visualization can offer an efficient path to study data such as yeast cell biological data. However, it has not adequately been developed in time-lapse microscopic images with interactive visualization. In fact, there is a knowledgeable gap between some biology areas and suitable visualization tools, in particular, visualizing microfluidics images interpreting the dynamic development of cells and lifespan. 
+The biological processes of cell lineage family tree that deployed in spatial and temporal are essential in the biomedical field including research, medicine and diagnosis a variety of diseases. Thus, quantitative analysis of cell behavior constructed on lineage tree tagged with appropriate measurements for the individual cell is the imperative basis for understanding the dynamics and structure of organisms \cite{r2.6}. Comprehensive and detailed information considering cell locality position, pathway, nucleus, formation, dissection, replicative and replicative lifespan (RLS) can potentially be concluded from images using a combination of manual and automatic visualization tools \cite{r2.7}. Having an automatic tool that collects microscopic images and generates interactive visualization of the cell family tree with a quantitative comparison of cells would be a great requisite for many medical applications.\\
+
+In the recent decade, crucial breakthroughs have been created and developed in the microscopy imaging of live-cell mechanisms such as fluorescent protein labeling, selective plane illumination microscopy (SPIM) and multiphoton laser scanning microscopy (MLSM)\cite{r2.7,r2.8}. Concurrently, many image processing algorithms have been developed for cell segmentation (e.g, semantic and instance), tracking and quantitative analysis \cite{r2.10} which are useful for visualization in many fields.\\
+
+Since many of the experimental results from microscopic images are based on numerical numbers that require expertise to verify the validation of the outcome, visualization can offer an efficient path to study data (e.g. yeast cell biological data) achieving understanding. However, it has not adequately been developed in time-lapse microscopic images with interactive visualization. In fact, there is a noticeable demand for suitable visualization tool in biology field, in particular, visualizing time-lapse microscopic images interpreting the dynamic development of cells and lifespan. 
 
 Microfluidics device is an ultra-small structure with microfluid channels offer faster and reliable results in comparison to traditional methods \cite {r2.1,r2.2}. Duo to their functionality, microscale, and nanoscale dimension, they can be used in many applications such as drug delivery, cell monitoring, cell division, virus inspection and so on \cite{r2.3,r2.4}. Time-lapse microfluidics images amplify biologists' ability to experimentally image live-cell during the developing progress \cite{r3}. Recently, a new network model of cellular aging was proposed based on the cellular aging process of yeast cells \cite{ref4.2}. For instance, Jo et al. \cite{\r13} investigated the high-throughput analysis of dividing yeast cells using microfluidic devices.\\ 
 
@@ -77,6 +117,13 @@ To this end, we developed a circular plotting method, $\mu$Polar, to interpret c
 The paper is organized as follows. In the results section, we concisely explain the data collection, feature extraction, and $\mu$Polar visualization analysis. In the discussion section, we focus on $\mu$Polar R package and $\mu$Polar functions. This section additionally covers some of $\mu$Polar plot examples including RLS. Finally, the conclusion section renders a summary of the proposed visualization method for microfluidics-based microscopic images.
 
  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  add this part  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ I think it makes much more sense to represent a pose as a small matrix that converts a vector of positional coordinates relative to the viewer into positional coordinates relative to the shape itself. This is what they do in computer graphics and it makes it easy to capture the effect of a change in viewpoint.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ 
+ 
+ 
 %%%%%%%%%%%%%%%%%%%%%%%  to put note on pdf   %%%%%%%%%%%%%%%%%%%%%
 %  One of the major \todo[inline]{change this to red}. However, ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -84,19 +131,21 @@ The paper is organized as follows. In the results section, we concisely explain 
 
 \section{Results}
 
-We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images. The sequence images could be visualized based on time, distance The cells area and RLS data could be included in the input dataset optionally. In addition, $\mu$Polar offers color-based cell tracking feature for visualization. The "$\mu$Polar" uses three libraries including "dplyr", "plyr" and "plotly". Fig.\ref{fig:table} shows trap reference point, cells area, cell distance and $\mu$Polar dataset formation. The "$\mu$Polar" function takes time-lapse "dataset", "time" (image time number), "distance" (reference-cell), "area" (cell area), "offset" (adjusting plot), "adjust" (adjusting cell size), "track" (active cell color code based tracking) and "RLS" (available RLS dataset. The package is set up for up to 12 color codes categorizing the number of available cells at each time-point and cell distance. Any number above 12 would be a random color. The color codes are adjustable and could be varied for different image types.  
+We developed an R package called "$\mu$Polar" for time-lapse microfluidics-based microscopic images. The time-lapse microscopic images could be visualized based on time and distance. In the event of the dataset is included the area and RLS of cell attributes, the sequence RLS and dynamic shape of cell could be visualized optionally. In addition, $\mu$Polar offers color-based cell tracking option for cell tracking visualization. The "$\mu$Polar" utilises three "R" libraries including "dplyr", "plyr" and "plotly". Fig.\ref{fig:table} shows the features of the dataset comprising trap reference point, cell area and cell distance. In general terms, the R "$\mu$Polar" function takes time-lapse "dataset" in "csv" format which includes "time" (image time number), "distance" (reference point to cell), "area" (cell area), "offset" (adjusting plot), "adjust" (adjusting cell size), "track" (active cell color code based tracking) and "RLS" (division counting). The $\mu$Polar" color codes are set up for 12 colors  by default categorizing the number of available cells at each time-point corresponding to cells distance. Any number above 12 would be presented as a random color. The color codes are adjustable and could be varied for different image types.  
 
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth,height=10 cm]{Patterns/table.pdf}
-\caption{ \textbf{ $\mu$Polar input dataset formation}. A sub-image labeled with distance and area at time-point 1 including a sub-image with reference point. A sample table of $\mu$Polar data format at time-point 1.}
+\caption{ \textbf{ $\mu$Polar input dataset formation}. A sub-image labeled with distance and area at time-point 1 and a sub-image with reference point. A sample table of $\mu$Polar dataset features at time-point 1.}
 \label{fig:table}
 \end{figure*}
 
 
-\subsection{Apply $\mu$Polar function for plotting}
+\subsection{Apply $\mu$Polar function}
 
-Fig.\ref{fig:label} demonstrates an overview of $\mu$Polar function arguments for time-lapse images. The first argument is the time-lapse dataset that should be included time, distance, area (optional) and RLS (optional) which are required for an initial visualization as shown in Fig.\ref{fig:label}(a). The second and third arguments require the time and distance column numbers from the dataset respectively. The fourth argument requires the cells area column number from the dataset which can be set to "NA" if the area is unavailable. The default setting for the cell area is five. The fifth argument requires offset value adjusting the gap between the maximum cell radius of the plot and the plot out layer. Fig.\ref{fig:label}(c)) shows the comparison when "offset" set to 10 and when was initially set to "NA". This option is useful when there is an overcrowded region on the plot. The sixth argument relates to adjusting cell areas when the cells area dataset is available. Fig.\ref{fig:label}(d)) shows the comparison when the "adjust" set to 10 and when was initially set to "NA". The sixth argument requires "FALSE" or "TRUE" for cell color coding option. This is useful for cell tracking at each time-pints as illustrated in Fig.\ref{fig:label}(e). The last argument requires RLS dataset column number and can be represented on the plot as "red star" as shown in (Fig.\ref{fig:label}(f)). The RLS argument could be set to "NA" in the RLS dataset is unavailable.
+Fig.\ref{fig:label} demonstrates an overview of $\mu$Polar function arguments for time-lapse images.
+
+The first argument is the time-lapse dataset that should be included the time, distance, area (optional) and RLS (optional) as shown in Fig.\ref{fig:table} which are required for initial visualization. The second and third arguments require the time and distance column numbers from the dataset respectively. The fourth argument requires the cells area column number from the dataset which can be set to "NA" if the area is unavailable. The default setting for the cell area is five. The fifth argument requires offset value adjusting the gap between the maximum cell radius of the plot and the plot out layer. Fig.\ref{fig:label}(c)) shows the comparison when "offset" set to 10 and when was initially set to "NA". This option is useful when there is an overcrowded region on the plot. The sixth argument relates to adjusting cell areas when the cells area dataset is available. Fig.\ref{fig:label}(d)) shows the comparison when the "adjust" set to 10 and when was initially set to "NA". The sixth argument requires "FALSE" or "TRUE" for cell color coding option. This is useful for cell tracking at each time-pints as illustrated in Fig.\ref{fig:label}(e). The last argument requires RLS dataset column number and can be represented on the plot as "red star" as shown in (Fig.\ref{fig:label}(f)). The RLS argument could be set to "NA" in the RLS dataset is unavailable.
 
 
 \begin{figure*}
@@ -253,7 +302,7 @@ Fig.\ref{fig:polar}(b) shows a schematic of $\mu$Polar with some sample time-poi
 
 
 \section{Conclusion}
-Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. This software is implemented in an R package $\mu$Po available through GitHub from https://github.com/merang/uPolar.
+Microfluidics-based microscopy is becoming an increasingly popular research tool to monitor cellular events in biomedical research. One such application is the high-throughput analysis of dividing yeast cells. It is challenging to visualize and interpret the data gathered through microfluidics-based microscopy. Here, we developed a circular plotting method, $\mu$Polar, to visualize cell movements and cellular division events at hundreds of time points. Our method is interactive and easy to use. We demonstrated the utility of our method to describe the events of dividing yeast cells. Our method could be potentially applied to other types of microfluidic devices. This software is implemented in an R package $\mu$Polar available through GitHub from https://github.com/merang/uPolar.
 
 
 
